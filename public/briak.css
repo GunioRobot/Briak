@@ -130,7 +130,7 @@ input[type="text"]:focus, input[type="text"].focused {
   border: medium none;
   height: 15px;
   padding: 2px 0 2px 13px;
-  width: 200px;  
+  width: 200px;
   margin: 5px 0 0 10px;
 }
 
@@ -176,8 +176,8 @@ input[type="text"]:focus, input[type="text"].focused {
   width: 100px;
   margin: 0 0 3px 0;
 }
-      
-#connection input[type="submit"], 
+
+#connection input[type="submit"],
 #buckets input[type="submit"],
 #keys input[type="submit"] {
   width: 200px;

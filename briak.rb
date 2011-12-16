@@ -6,7 +6,7 @@ require 'uri'
 
 enable :sessions
 
-get '/' do 
+get '/' do
   @bucket = nil
   @keys = []
   @key = nil
@@ -55,8 +55,8 @@ post %r{/put/([^/]+)/(.*)} do |bucket, key|
   if params[:operation] == "Update"
     if params[:link_bucket] != "Bucket" && params[:link_key] != "Key" && params[:link_rel]
       o = find(params[:link_bucket], params[:link_key])
-      begin 
-        @robject.links << o.to_link(params[:link_rel].gsub(/[^[:alnum:]]/,'')) 
+      begin
+        @robject.links << o.to_link(params[:link_rel].gsub(/[^[:alnum:]]/,''))
       rescue Exception => e
         @flash = "ERROR: Invalid Bucket/Key combination"
         puts @flash
@@ -94,7 +94,7 @@ post '/delete_bucket/:bucket' do |bucket|
   }
   redirect "/"
 end
-    
+
 
 get '/remove_link/:bucket/:key/:link_bucket/:link_key/:link_rel' do |bucket, key, link_bucket, link_key, link_rel|
   o = find(bucket,key)
@@ -136,7 +136,7 @@ end
 
 def create(bucket,key, data, content_type=nil)
   key = key.gsub(/\s/,'') if key
-  b = bucket.is_a?(Riak::Bucket) ? bucket : client.bucket(bucket) 
+  b = bucket.is_a?(Riak::Bucket) ? bucket : client.bucket(bucket)
   n = Riak::RObject.new(b, key)
   content_type = data.is_a?(String) ? "text/plain" : "text/yaml" unless content_type
   n.content_type = content_type
@@ -157,7 +157,7 @@ end
 # Renders out the appropriate HTML for each content type
 helpers do
   def render_data(bucket, key, robject)
-    case 
+    case
     when robject.content_type =~ %r{application/json}
         %Q{<textarea id="key-data" name="data" spellcheck="false">#{robject.data.to_json}</textarea>}
       when robject.content_type =~ %r{image}
@@ -165,6 +165,6 @@ helpers do
       else
         %Q{<textarea id="key-data" name="data" spellcheck="false">#{robject.data.to_s}</textarea>}
     end
-  end  
+  end
 end
 

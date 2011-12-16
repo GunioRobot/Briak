@@ -11,8 +11,8 @@
         <input type="submit" value="Connect" />
       </form>
     </div>
-  </div>  
-  
+  </div>
+
   <div id="buckets">
     <div class="top-bar">
       <h2>Buckets <span class="edit-link">(edit)</span></h2>
@@ -34,7 +34,7 @@
       </select>
     </div>
   </div>
-  
+
   <div id="keys">
     <div class="top-bar">
       <h2>Keys <% if @bucket %><span class="edit-link">(add)</span><% end %></h2>
@@ -61,8 +61,8 @@
   <% if @robject %>
     <form action="/put/<%= @bucket %>/<%= @key %>" method="POST">
     <label>Content Type:</label> <input type="text" name="content_type" value="<%= @robject.content_type %>" /><br />
-    <label>Create Link:</label> <input type="text" title="Bucket" name="link_bucket" /> 
-    <input type="text" title="Link" name="link_key" /> 
+    <label>Create Link:</label> <input type="text" title="Bucket" name="link_bucket" />
+    <input type="text" title="Link" name="link_key" />
     <input type="text" title="Relationship Tag" name="link_rel" /><br />
     <% @robject.links.select{|l| l.rel != "up"}.each do |l| %>
       <label>Link:</label> <a href="<%= "/get/#{l.bucket}/#{l.key}" %>"><%= "/get/#{l.bucket}/#{l.key}" %></a>
@@ -98,15 +98,15 @@
   $('#bucket_names').change(function() {
     window.location = '/get/' + $('#bucket_names').val();
   });
-  
+
   $('#buckets .edit-link').click(function() {
     $('#edit-buckets').toggle();
   });
-  
+
   $('.main .buttons .edit-link').click(function() {
     $('#eval-help').toggle();
   });
-  
+
   $('#keys .edit-link').click(function() {
     $('#edit-keys').toggle();
   });
@@ -114,35 +114,35 @@
   $('.main input[value="Delete"]').click(function() {
     return confirm("Are you sure?");
   });
-  
+
   $('input.filter').bind("blur keyup", function() {
     $(this).val() == "" ? $(this).addClass("placeholder") : $(this).removeClass("placeholder");
   });
-  
+
   $(document).ready(function() {
     $('#keys').liveFilter('ul');
   });
-  
+
   $(document).ready(function() {
   	$('input[title]').each(function() {
   		if($(this).val() === '') {
   			$(this).val($(this).attr('title'));
   		}
-  
+
   		$(this).focus(function() {
   			if($(this).val() === $(this).attr('title')) {
   				$(this).val('').addClass('focused');
   			}
   		});
-  
+
   		$(this).blur(function() {
   			if($(this).val() === '') {
   				$(this).val($(this).attr('title')).removeClass('focused');
   			}
   		});
   	});
-  });  
-  
+  });
+
   jQuery(function($) { // document ready
     $('a.delete-bucket').live('click', function(event) {
         if ( confirm("Are you sure you want to delete all the keys in bucket: <" + $('#bucket_names').val() + "> ?") )
@@ -152,5 +152,5 @@
         return false;
     });
   });
-  
+
 </script>
